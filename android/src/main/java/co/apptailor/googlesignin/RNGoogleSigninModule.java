@@ -153,12 +153,14 @@ public class RNGoogleSigninModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void currentUserAsync(Promise promise) {
+        
+        _signinPromise = promise;
+       
         if (_apiClient == null) {
             rejectWithNullClientError();
             return;
         }
-        _signinPromise = promise;
-
+        
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
